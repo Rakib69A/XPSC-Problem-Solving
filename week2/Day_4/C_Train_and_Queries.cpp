@@ -4,7 +4,7 @@ using namespace std;
 
 void solve()
 {
-    int n,k;
+    int n, k;
     cin >> n >> k;
 
     map<int, int> miniindex;
@@ -21,11 +21,11 @@ void solve()
 
         maxiindex[arr[i]] = i;
     }
-    int a,b;
+    int a, b;
     while (k--)
     {
         cin >> a >> b;
-        if (maxiindex[b] != 0  && maxiindex[b] - miniindex[a] >= 0)
+        if (maxiindex[b] != 0 && miniindex[a] != 0 && maxiindex[b] - miniindex[a] >= 0)
             cout << "YES" << endl;
         else
             cout << "NO" << endl;
