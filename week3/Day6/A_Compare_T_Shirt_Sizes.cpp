@@ -18,7 +18,7 @@ void solve() {
     } else {
         cout << (ca < cb ? '>' : '<');
     }
-    cout << '\n';
+    cout << endl;
 }
 
 int main() {
