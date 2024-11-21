@@ -1,32 +1,27 @@
 #include <bits/stdc++.h>
 #define ll long long
 using namespace std;
-
-int main() {
+int main()
+{
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-
     int n;
     ll s;
-    cin >> n >> s;
-    vector<ll> a(n);
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-    }
-
+    cin>>n>>s;
+    vector<int> a(n);
+    for(int i=0;i<n;i++)
+        cin>>a[i];
+    int l = 0, r = 0;
     ll sum = 0, ans = 0;
-    int l = 0;
-
-    for (int r = 0; r < n; r++) {
+    while(r < n){
         sum += a[r];
-
-        while (sum >= s) {
-            ans += (n - r);
-            sum -= a[l++];
+        while(sum >= s){
+            ans += (n-r);
+            sum -= a[l];
+            l++;
         }
+        r++;
     }
-
-    cout << ans << endl;
-
+    cout<<ans<<endl;
     return 0;
 }
