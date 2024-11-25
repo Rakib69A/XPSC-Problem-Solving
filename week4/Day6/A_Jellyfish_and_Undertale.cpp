@@ -3,14 +3,12 @@ using namespace std;
 void solve()
 {
     int a,b,n,x;
-    long long ans = 0;
     cin>>a>>b>>n;
-    ans = b;
+    long long ans = b;
     for(int i=0;i<n;i++){
         cin>>x;
-        ans += min(a-1, x);
+        ans += min(x,a-1);
     }
-
     cout<<ans<<endl;
 }
 int main()
