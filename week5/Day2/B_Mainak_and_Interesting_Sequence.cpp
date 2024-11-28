@@ -1,33 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
-void solve()
-{
-    int N, M;
-	cin >> N >> M;
-
-	if(((N % 2 == 0) && (M % 2 == 1)) || (M < N)){ // impossible cases, M < N and (M - odd, N - even)
-		cout << "NO\n";
-	}else if((N % 2) == 1){ // (N - odd)
-		cout << "YES\n";
-		for(int i = 1; i < N; ++i){
-			cout << "1 ";
+void solve(){
+	int n,m;
+	cin>>n>>m;
+	if((n%2==0 and m%2==1) || n > m )
+		cout<<"NO"<<endl;
+	else if(n%2==1){
+		cout<<"YES"<<endl;
+		for(int i=0;i<n-1;i++){
+			cout<<1<<" ";
 		}
-		cout << M - N + 1 << '\n';
-	}else{ // (N - even, M - even)
-		cout << "YES\n";
-		for(int i = 2; i < N; ++i){
-			cout << "1 ";
+		cout<<(m-n+1)<<endl;
+	}
+	else{
+		cout<<"YES"<<endl;
+		for(int i=0;i<n-2;i++){
+			cout<<1<<" ";
 		}
-		cout << (M - N + 2) / 2 << ' ' << (M - N + 2) / 2 << '\n';
+		cout<<(m-n+2)/2<<" "<<(m-n+2)/2<<endl;
 	}
 }
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    int t;cin>>t;
-    while(t--){
-        solve();
-    }
-    return 0;
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	int t;cin>>t;
+	while(t--){
+		solve();
+	}
+	return 0;
 }
