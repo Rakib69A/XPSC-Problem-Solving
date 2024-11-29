@@ -1,22 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
-void solve(){
-    int n;
-    cin >> n;
-    if (n % 2 == 1) {
-      cout << "NO" << '\n';
-      return;
-    }
-    cout << "YES" << '\n';
-    for (int i = 0; i < n / 2; ++i)
-      for (int j = 0; j < 2; ++j)
-        cout << "AB"[i & 1];
-    cout << '\n';
-}
-int main() {
-  int t;
-  cin >> t;
-  while (t--) {
-    solve();
+void solve()
+{
+  int n;cin>>n;
+  if(n%2 == 1){
+    cout<<"NO"<<endl;
+    return;
   }
+  cout<<"YES"<<endl;
+  for(int i=1;i<=n/2;i++){
+    if(i%2==1)
+      cout<<"AA";
+    else  cout<<"BB";
+  }
+  cout<<endl;
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int t;cin>>t;
+    while(t--){
+      solve();
+    }
+    return 0;
 }
