@@ -1,34 +1,38 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-void solve() {
+void solve()
+{
     int n;
     cin >> n;
-    vector<int> a(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i];
-    }
-    
-    vector<int> cnt(26, 0); 
-    string s = "";
-    
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < 26; ++j) {
-            if (cnt[j] == a[i]) {
-                cnt[j]++;
-                s += char(97 + j);
+    vector<int> v(n);
+    for (int i = 0; i < n; i++)
+        cin >> v[i];
+    map<char, int> mp;
+    char ch = 'a';
+    for (int i = 0; i < 26; i++)
+        mp[ch++] = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (auto it : mp)
+        {
+            if (it.second == v[i]){
+                cout<<it.first;
+                mp[it.first]++;
                 break;
             }
         }
     }
-    
-    cout << s << '\n';
+    cout<<endl;
 }
 
-int main() {
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
     int t;
     cin >> t;
-    while (t--) {
+    while (t--)
+    {
         solve();
     }
     return 0;
