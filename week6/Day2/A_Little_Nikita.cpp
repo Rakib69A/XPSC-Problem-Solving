@@ -2,15 +2,9 @@
 using namespace std;
 void solve()
 {
-    int n;cin>>n;
-    cout<<n/2 + n%2<<endl;
-    int l=1, r=n*3;
-    while(l < r){
-        cout<<l<<" "<<r<<" ";
-        l += 3;
-        r -= 3;
-    }
-    cout<<endl;
+     int n, m;
+    cin >> n >> m;
+    cout << (n >= m && (n%2) == (m%2) ? "Yes" : "No") << '\n';
 }
 int main()
 {
