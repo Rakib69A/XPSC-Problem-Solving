@@ -1,23 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 void solve(){
-    int n;
-        cin >> n;
-        string s;
-        cin >> s;
-        string t = s;
-        reverse(t.begin(), t.end());
-        cout << min(s, t + s) << endl;
+    int n;cin>>n;
+    string s;
+    cin>>s;
+    string rev = s;
+    reverse(rev.begin(),rev.end());
+    cout<< min(s,rev+s)<<endl;
 }
-int main() {
-    std::ios_base::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-
-    int tt;
-    std::cin >> tt;
-    while (tt--) {
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int t;cin>>t;
+    while(t--){
         solve();
     }
-
     return 0;
 }
