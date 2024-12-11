@@ -1,59 +1,52 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-
-vector<int>allPalindrome;
-
-bool isPalindrome(int num){
-	int rev=0;
-	int temp=num;
-	while (num>0){
-		rev=rev*10 + (num%10);
-		num/=10;
-	}
-	return (rev==temp);
+const int maxN = (1LL << 15);
+vector<int> allPalindrome;
+bool isPalindrome(int n)
+{
+	string s = to_string(n);
+	string t = s;
+	reverse(t.begin(), t.end());
+	return t == s;
 }
-void solve(){
-	long long int n;
-	cin>>n;
-	long long int v[n];
-	long long int freq[(1<<17)];
-	memset(freq,0,sizeof(freq));
-	for (int i=0;i<n;i++){
-		cin>>v[i];
-		freq[v[i]]++;
-	}
-    long long int ans=0;
-	for (int i=0;i<allPalindrome.size();i++){
-		long long int num=allPalindrome[i];
-		for (int j=0;j<n;j++){
-			ans+=freq[v[j]^num];	
-		}
-	}
-
-	ans/=2;
-
-    for (int i=0;i<(1<<17);i++){
-        ans = ans + (freq[i] * (freq[i]+1))/2;
-
-    }
-	cout<<ans<<endl;
-}
-
-void generatePalindromes(){
-	for (int i=1;i<=(1<<17);i++){
-		if (isPalindrome(i)){
+void makePalindrome()
+{
+	for (int i = 0; i < maxN; i++)
+	{
+		if (isPalindrome(i))
 			allPalindrome.push_back(i);
-		}
 	}
 }
 
-int main(){
+int main()
+{
 	ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+	cin.tie(nullptr);
+	makePalindrome();
+	// cout<<allPalindrome.size()<<endl;
+	// for (auto val : allPalindrome)
+	// 	cout << val << " ";
+	// cout << endl;
 	int t;
-	cin>>t;
-	generatePalindromes();
-	while (t--){
-		solve();
+	cin >> t;
+	while (t--)
+	{
+		int n;
+		cin >> n;
+		vector<int> v(n),cnt(maxN+1);
+		for (int i = 0; i < n; i++)
+		{
+			cin >> v[i];
+			cnt[v[i]]++;
+		}
+		long long ans = n;
+		for(int i=0;i<n;i++){
+			for(int j=0;j<allPalindrome.size();j++){
+				int curr = v[i]^allPalindrome[j];
+				ans += cnt[curr];
+			}
+		}
+		cout<<ans/2<<endl;
 	}
+	return 0;
 }
