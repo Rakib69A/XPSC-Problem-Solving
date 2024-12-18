@@ -1,28 +1,31 @@
-#include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
+int okey(int l, int r){
+    int temp = 0;
+    for(int i=31;i>=0;i--){
+        int x = ((1<<i)&l) ? 1 : 0;
+        int y = ((1<<i)&r) ? 1 : 0;
 
-void solve() {
-    long long n, m;
-    cin >> n >> m;
-    long long ans = 0;
-    for (int i = 0; i <= 30; ++i) {
-        long long x = n & ((1LL << (i + 1)) - 1);
-        long long t = (1LL << i) - x;
-        if (n >= (1LL << i)) {
-            t = min(t, x + 1);
-        }
-        if (x >= (1LL << i) || t <= m) {
-            ans |= (1LL << i);
+        if(x^y){
+            temp = (1<<i);
+            temp |= (temp-1);
+            break;
         }
     }
-    cout << ans << endl;
+    return l|temp;
 }
-
-int main() {
-    int T = 1;
-    cin >> T;
-    while (T--) {
+void solve(){
+    int n,m;
+    cin>>n>>m;
+    int ans = okey(max(0,n-m),n+m);
+    cout<<ans<<endl;
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int t;cin>>t;
+    while(t--){
         solve();
     }
     return 0;
