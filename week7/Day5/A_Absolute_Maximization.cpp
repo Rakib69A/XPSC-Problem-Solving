@@ -1,43 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-void solve() {
-    long n;
-    cin >> n;
-    bool a[11] = {0};
-    bool z[11] = {0};
-
-    for (long p = 0; p < n; ++p) {
-        long x;
-        cin >> x;
-        for (long u = 0; u <= 10; ++u) {
-            if (x % 2) {
-                a[u] = true;
-            } else if (x % 2 == 0) {
-                z[u] = true;
-            }
-            x /= 2;
-        }
+void solve(){
+    int n;cin>>n;
+    vector<int> a(n);
+    for(int i=0;i<n;i++)
+        cin>>a[i];
+    int OR = a[0];
+    int AND = a[0];
+    for(int i=1;i<n;i++){
+        OR |= a[i];
+        AND &= a[i];
     }
-
-    long res = 0;
-    long mult = 1;
-    for (long u = 0; u <= 10; ++u, mult *= 2) {
-        res += mult * a[u] * z[u];
-    }
-
-    cout << res << endl;
+    cout<<OR-AND<<endl;
 }
-
-int main() {
+int main()
+{
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-
-    long t;
-    cin >> t;
-    while (t--) {
+    int t;cin>>t;
+    while(t--){
         solve();
     }
-
     return 0;
 }

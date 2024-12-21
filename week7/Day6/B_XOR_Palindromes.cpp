@@ -1,41 +1,39 @@
 #include <bits/stdc++.h>
 using namespace std;
-void solve()
-{
-    int n;
-    cin >> n;
+void solve(){
+    int n;cin>>n;
     string s;
-    cin >> s;
-    string t(n + 1, '0');
-    int ans = 0;
-    int max_1 = 0;
-    int max_2 = 0;
-    for (int i = 0; i <= n / 2 - 1; ++i)
-    {
-        if (s[i] == s[n - i - 1])
-            max_2++;
-        else
-            ans++;
+    cin>>s;
+    int gp = 0;
+    int b = 0;
+    string ans = "";
+    int l = 0, r = n-1;
+    while(l<r){
+        if(s[l] == s[r]) gp += 2;
+        else  b++;
+        l++,r--;
     }
-    if (n % 2 == 1)
-        max_1++;
-    for (int j = 0; j <= max_2; ++j)
-    {
-        for (int k = 0; k <= max_1; ++k)
-        {
-            t[ans + j * 2 + k] = '1';
+    for(int i=0;i<=n;i++){
+        int total = i;
+        total -= b;
+        if(total < 0){
+            ans += '0';
+            continue;
         }
+        total = max((total%2),total-gp);
+        total = max(0,total-n%2);
+        ans += (total == 0 ? '1' : '0');
     }
-    cout << t << "\n";
+    cout<<ans<<endl;
 }
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    int t;
-    cin >> t;
-    while (t--)
-    {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    int t;cin>>t;
+    while(t--){
         solve();
     }
+    return 0;
 }
