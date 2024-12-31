@@ -2,41 +2,42 @@
 #define ll long long
 using namespace std;
 
-void solve() {
-    ll a = 0, b, c, d, pos = 1, bit_b, bit_c, bit_d, mask = 1;
-    cin >> b >> c >> d;
-    
-    for (ll i = 0; i < 62; i++) {
-        bit_b = (b & mask) ? 1 : 0;
-        bit_c = (c & mask) ? 1 : 0;
-        bit_d = (d & mask) ? 1 : 0;
-        
-        if ((bit_b && !bit_c && !bit_d) || (!bit_b && bit_c && bit_d)) {
-            pos = 0;
-            break;
-        }
-        
-        if (bit_b && bit_c) {
-            a += (1 - bit_d) * mask;
-        } else {
-            a += bit_d * mask;
-        }
-        
-        mask <<= 1;
-    }
-    
-    cout << (pos ? a : -1) << "\n";
-}
-
-int main() {
+int main()
+{
     ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    
-    ll t;
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    int t;
     cin >> t;
-    while (t--) {
-        solve();
+    map<tuple<ll, ll, ll>, ll> mp;
+    mp[{0, 0, 0}] = 0;
+    mp[{0, 0, 1}] = 1;
+    mp[{0, 1, 0}] = 0;
+    mp[{0, 1, 1}] = -1;
+    mp[{1, 0, 0}] = -1;
+    mp[{1, 0, 1}] = 0;
+    mp[{1, 1, 0}] = 1;
+    mp[{1, 1, 1}] = 0;
+    while (t--)
+    {
+        ll a = 0, b, c, d;
+        cin >> b >> c >> d;
+       
+        for (ll i = 60; i >= 0; i--)
+        {
+            int I = (((1ll << i) & b) != 0);
+            int J = (((1ll << i) & c) != 0);
+            int K = (((1ll << i) & d) != 0);
+            int x = mp[{I, J, K}];
+            if (x == -1)
+            {
+                a = -1;
+                break;
+            }
+            else
+                a += x * (1LL << i);
+        }
+        cout << a << endl;
     }
     return 0;
 }
