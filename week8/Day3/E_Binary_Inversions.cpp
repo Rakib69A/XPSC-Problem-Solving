@@ -1,41 +1,15 @@
 #include <bits/stdc++.h>
 #define ll long long
 using namespace std;
-void solve(){
-    ll n, ans = 0, cnt = 0, mx = 0, one = 0, zero = 0; cin >> n;
-    vector<ll> a(n);
-        for(ll i = 0; i < n; i++) cin >> a[i];
-        for(ll i = n - 1; i >= 0; i--){
-            if(a[i] == 0){
-                cnt++;
-                zero = (i + 1);
-            }
-            else{
-                ans += cnt;
-                if(one == 0) one = (i + 1);
-            }
+ll invCount(int n,vector<int>& a){
+    int one = 0, res = 0;
+    for(int i=0;i<n;i++){
+        if(a[i] == 1) one++;
+        else{
+            res += one;
         }
-        mx = max(mx, ans);
-        cnt = 0, ans = 0;
-        if(zero > 0){
-            a[zero - 1] = 1;
-            for(ll i = n - 1; i >= 0; i--){
-                if(a[i] == 0) cnt++;
-                else ans += cnt;
-            }
-            mx = max(mx, ans);
-            cnt = 0, ans = 0;
-            a[zero - 1] = 0;
-        }
-        if(one > 0){
-            a[one - 1] = 0;
-            for(ll i = n - 1; i >= 0; i--){
-                if(a[i] == 0) cnt++;
-                else ans += cnt;
-            }
-            mx = max(mx, ans);
-        }
-        cout << mx << endl;
+    }
+    return res;
 }
 int main()
 {
@@ -44,7 +18,31 @@ int main()
     cout.tie(nullptr);
     int t;cin>>t;
     while(t--){
-        solve();
+        int n;cin>>n;
+        vector<int> a(n);
+        for(auto& x : a) cin>>x;
+        ll ans = invCount(n,a);
+        int pos = -1;
+        for(int i=0;i<n;i++){
+            if(a[i] == 0){
+                pos = i;
+                a[i] = 1;
+                break;
+            }
+        }
+        ans = max(ans,invCount(n,a));
+        if(pos != -1){
+            a[pos] = 0;
+        }
+        for(int i=n-1;i>=0;i--){
+            if(a[i] == 1){
+                pos = i;
+                a[i] = 0;
+                break;
+            }
+        }
+        ans = max(ans,invCount(n,a));
+        cout<<ans<<endl;
     }
     return 0;
 }
